@@ -18,6 +18,15 @@ const postSchema = mongoose.Schema({
 
 })
 
-const PostMessage = mongoose.model('PostMessage', postSchema)
+postSchema.set('toJSON', {
+  transform: (document, returnedObject) => {
+    returnedObject.id = returnedObject._id.toString()
+    delete returnedObject._id
+    delete returnedObject.__v
+  }
+})
 
-export default PostMessage
+
+const Post = mongoose.model('Post', postSchema)
+
+export default Post
