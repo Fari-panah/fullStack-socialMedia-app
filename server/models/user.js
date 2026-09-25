@@ -12,7 +12,7 @@ const userSchema = mongoose.Schema({
     name: String,
     //install the bcrypt package for generating the password hashes:
     passwordHash: String,
-    folllowersCount: {
+    followersCount: {
         type: Number,
         default: 0
     },
@@ -27,7 +27,7 @@ const userSchema = mongoose.Schema({
     },
  posts:[
     {
-      type: mongoose.Schema.Types.ObjectId, //ObjectId, meaning it refers to another document.
+      type: mongoose.Schema.Types.ObjectId, //ObjectId, meaning it refers to another document by id.
       ref: 'Post' //specifies the name of the model being referenced.
     }
 
