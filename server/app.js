@@ -3,8 +3,9 @@ import mongoose from 'mongoose'
 import cors from 'cors'
 import { error, info } from './utils/logger.js'
 import { MONGODB_URI  } from './utils/config.js'
-import postRoutes from './routes/posts.js'
+import postRouter from './routes/posts.js'
 import usersRouter from './routes/users.js'
+import loginRouter from './routes/login.js'
 
 const app = express()
 
@@ -17,8 +18,9 @@ mongoose
 
 app.use(express.json())
 app.use(cors())
-app.use('/posts', postRoutes)
+app.use('/api/posts', postRouter)
 app.use('/api/users', usersRouter )
+app.use('/api/login', loginRouter )
 
 export default app
 

@@ -1,0 +1,11 @@
+POST http://localhost:3001/api/posts
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImpvaG4iLCJpZCI6IjZhYmUxN2RlOTcwZTMxZjkwMjI0ZDY0ZSIsImlhdCI6MTc5MDg1NDE2NSwiZXhwIjoxNzkwODU3NzY1fQ._50xSFpje2a86DWUC9xE6VK2mza0vSuryvFpFYkonHU
+
+{
+   "title": "VS Code REST Client is a pretty handy tool",
+    "content": "It makes testing APIs directly from VS Code easy without needing Postman.",
+    "tags": ["vscode", "rest-client", "javascript"],
+    "mediaUrl": "https://example.com/image.png",
+    "mediaType": "image"
+}
