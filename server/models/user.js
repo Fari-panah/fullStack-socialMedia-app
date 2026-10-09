@@ -16,6 +16,11 @@ const userSchema = mongoose.Schema({
         type: Number,
         default: 0
     },
+    email: {
+      type: String,
+      required: true,
+      unique: true
+    },
     followingCount: {
         type: Number,
         default: 0

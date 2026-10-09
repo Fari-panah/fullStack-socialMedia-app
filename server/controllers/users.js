@@ -4,8 +4,8 @@ import bcrypt from 'bcrypt'
 export const createUser = async(req, res) => {
     try {
         const { username, name, password } = req.body
-        if(!username || !password || !name) 
-            return res.status(400).json({'message': 'username, name and password are required!'})
+        if(!username || !password || !email) 
+            return res.status(400).json({'message': 'username, email and password are required!'})
         if (password.length < 8) {
             return res.status(400).json({
             error: 'password must be at least 8 characters'

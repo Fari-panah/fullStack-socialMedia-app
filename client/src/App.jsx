@@ -10,6 +10,9 @@ const App = () => {
   return (
     <>
       <Header />
+
+    {/* {!user && <SignUp/>}
+     {user && <Home />}. */}
      
       <Routes>
         <Route path="/signup" element={<SignUp/>} />

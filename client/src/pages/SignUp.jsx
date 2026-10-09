@@ -12,11 +12,12 @@ const SignUp = () => {
     const [password, setPassword] = useState('')
     const [errorMessage, setErrorMessage] = ('')
 
-    const handleFormSubmit = (e) => {
+    const handleSignUpForm = (e) => {
         e.preventDefault()
         if(!username || !email || !password){
             return setErrorMessage('Please fill out all fields!')
         }
+      
 
 
     }
@@ -48,7 +49,7 @@ const SignUp = () => {
                     </Typography>
                     <Box
                       component="form"
-                      onSubmit={handleFormSubmit}
+                      onSubmit={handleSignUpForm }
                       >
                         <TextField
                         label="Username"
