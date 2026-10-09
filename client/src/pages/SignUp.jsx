@@ -1,4 +1,4 @@
-import { Box,
+import { Alert, Box,
   Button,
   Container,
   Paper,
@@ -10,9 +10,13 @@ const SignUp = () => {
     const [username, setUsername] = useState('')
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
+    const [errorMessage, setErrorMessage] = ('')
 
     const handleFormSubmit = (e) => {
         e.preventDefault()
+        if(!username || !email || !password){
+            return setErrorMessage('Please fill out all fields!')
+        }
 
 
     }
@@ -52,7 +56,7 @@ const SignUp = () => {
                         margin="normal"
                         value={username}
                         onChange={(e) =>
-                        setUsername(e.target.value)
+                        setUsername(e.target.value.trim())
                         }
                     />
 
@@ -62,7 +66,7 @@ const SignUp = () => {
                         margin="normal"
                         value={email}
                         onChange={(e) =>
-                        setEmail(e.target.value)
+                        setEmail(e.target.value.trim())
                         }
                     />
 
@@ -72,7 +76,7 @@ const SignUp = () => {
                         margin="normal"
                         value={password}
                         onChange={(e) =>
-                        setPassword(e.target.value)
+                        setPassword(e.target.value.trim())
                         }
                     />
                     <Button
@@ -109,8 +113,10 @@ const SignUp = () => {
                         </Link>
                     </Typography>
                     </Box>
+                    <Alert>{errorMessage}</Alert>
                 </Paper>
-            </Container>     
+            </Container> 
+                
     )
 
 }
