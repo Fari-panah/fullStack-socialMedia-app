@@ -12,15 +12,16 @@ const userSchema = mongoose.Schema({
     name: String,
     //install the bcrypt package for generating the password hashes:
     passwordHash: String,
-    followersCount: {
-        type: Number,
-        default: 0
-    },
     email: {
       type: String,
       required: true,
       unique: true
     },
+    followersCount: {
+        type: Number,
+        default: 0
+    },
+    
     followingCount: {
         type: Number,
         default: 0

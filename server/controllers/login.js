@@ -5,7 +5,7 @@ import User from '../models/user.js'
 const login = async (req, res) => {
     const { username, password } = req.body
     try {
-         const user = await User.findOne({ username })
+        const user = await User.findOne({ username })
         const passwordCorrect = user === null
         ? false
         : await bcrypt.compare(password, user.passwordHash)

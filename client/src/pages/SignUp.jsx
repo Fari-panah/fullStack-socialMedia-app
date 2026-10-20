@@ -1,4 +1,4 @@
-import { Alert, Box,
+import { Box,
   Button,
   Container,
   Paper,
@@ -6,16 +6,37 @@ import { Alert, Box,
   Typography } from '@mui/material'
 import { useState } from 'react'
 import { Link } from 'react-router-dom'
+import Notification from '../components/Notification'
+import userService from '../services/users'
 const SignUp = () => {
     const [username, setUsername] = useState('')
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
-    const [errorMessage, setErrorMessage] = ('')
+    const [errorMessage, setErrorMessage] = useState('')
 
-    const handleSignUpForm = (e) => {
+    const handleSignUpForm = async(e) => {
         e.preventDefault()
         if(!username || !email || !password){
             return setErrorMessage('Please fill out all fields!')
+        }
+        try {
+            await userService.create({
+                username,
+                email,
+                password
+            })
+            setUsername('')
+            setEmail('')
+            setPassword('')
+            
+        } catch (error) {
+            console.log(error.response?.data)
+
+  setErrorMessage(
+    error.response?.data?.error ||
+    error.response?.data?.message ||
+    'Failed to create user'
+  )
         }
       
 
@@ -114,7 +135,7 @@ const SignUp = () => {
                         </Link>
                     </Typography>
                     </Box>
-                    <Alert>{errorMessage}</Alert>
+                    <Notification message={errorMessage}/>
                 </Paper>
             </Container> 
                 

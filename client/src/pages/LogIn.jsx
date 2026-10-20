@@ -2,6 +2,7 @@ import { Container, Typography, Paper, Box,
   TextField, Button
  } from "@mui/material"
 import { useState } from "react"
+import { Link, useNavigate } from 'react-router-dom'
 import loginService from '../services/login'
 import Notification from '../components/Notification'
 
@@ -11,13 +12,16 @@ const LogIn = () => {
   const [errorMessage, setErrorMessage] = useState(null)
   const [user, setUser] = useState(null)
 
+  const navigate = useNavigate()
+
   const handleLoginForm= async (e) => {
     e.preventDefault()
     try {
-      const user = await loginService.login({ username, setPassword })
+      const user = await loginService.login({ username, password })
       setUser(user)
       setUsername('')
       setPassword('')
+      navigate('/')
       
     } catch (error) {
         setErrorMessage('wrong credentials', error )
@@ -63,7 +67,7 @@ const LogIn = () => {
             margin="normal"
             value={username}
             onChange={(e) =>
-            setUsername(e.target.value.trim())
+            setUsername(e.target.value)
             }
         />
           <TextField
@@ -71,7 +75,7 @@ const LogIn = () => {
           fullWidth
           margin="normal"
           value={password}
-          onChange={(e) => setPassword(e.target.value.trim())
+          onChange={(e) => setPassword(e.target.value)
           }
       />
       <Button
@@ -91,6 +95,21 @@ const LogIn = () => {
         }}>
         Log In
         </Button>
+        <Typography
+            align="center"
+            sx={{ mt: 3 }}
+        >
+            Dont have an account?{' '}
+            <Link
+                to="/signup"
+                style={{
+                    color: '#3d5afe',
+                    textDecoration: 'none',
+                }}
+            >
+            Sign Up
+            </Link>
+        </Typography>
         </Box>
 
       </Paper>

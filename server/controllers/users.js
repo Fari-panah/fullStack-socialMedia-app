@@ -3,7 +3,7 @@ import bcrypt from 'bcrypt'
 
 export const createUser = async(req, res) => {
     try {
-        const { username, name, password } = req.body
+        const { username, email, password } = req.body
         if(!username || !password || !email) 
             return res.status(400).json({'message': 'username, email and password are required!'})
         if (password.length < 8) {
@@ -30,7 +30,7 @@ export const createUser = async(req, res) => {
             
             const user = new User({
                 username,
-                name,
+                email,
                 passwordHash,
             })
 
