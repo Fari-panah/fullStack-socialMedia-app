@@ -12,7 +12,8 @@ const SignUp = () => {
     const [username, setUsername] = useState('')
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
-    const [errorMessage, setErrorMessage] = useState('')
+    const [errorMessage, setErrorMessage] = useState(null)
+    const [successMessage, setSuccessMessage] = useState(null)
 
     const handleSignUpForm = async(e) => {
         e.preventDefault()
@@ -25,6 +26,7 @@ const SignUp = () => {
                 email,
                 password
             })
+            setSuccessMessage('Account created successfully! You can now log in.')
             setUsername('')
             setEmail('')
             setPassword('')
@@ -32,11 +34,11 @@ const SignUp = () => {
         } catch (error) {
             console.log(error.response?.data)
 
-  setErrorMessage(
-    error.response?.data?.error ||
-    error.response?.data?.message ||
-    'Failed to create user'
-  )
+            setErrorMessage(
+                error.response?.data?.error ||
+                error.response?.data?.message ||
+                'Failed to create user'
+            )
         }
       
 
@@ -135,7 +137,15 @@ const SignUp = () => {
                         </Link>
                     </Typography>
                     </Box>
-                    <Notification message={errorMessage}/>
+                    <Notification
+                        message={successMessage}
+                        severity="success"
+                        />
+
+                    <Notification
+                    message={errorMessage}
+                    severity="error"
+                    />
                 </Paper>
             </Container> 
                 
