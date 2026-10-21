@@ -2,11 +2,11 @@ import mongoose from 'mongoose'
 
 const userSchema = mongoose.Schema({
     username:{
-    type: String,
-    required: true,
-    minlength: 4,
-    match: /^[a-zA-Z0-9_]+$/,
-    unique: true 
+      type: String,
+      required: true,
+      minlength: 4,
+      match: /^[a-zA-Z0-9_]+$/,
+      unique: true 
 
     },
     name: String,
@@ -18,17 +18,23 @@ const userSchema = mongoose.Schema({
       unique: true
     },
     followersCount: {
-        type: Number,
-        default: 0
+      type: Number,
+      default: 0
     },
     
     followingCount: {
-        type: Number,
-        default: 0
+      type: Number,
+      default: 0
     },
     lastSeen: {
-        type: Date,
-        default: null,
+      type: Date,
+      default: null,
+
+    },
+    profilePicture: {
+      type: String,
+      default: "https://pixabay.com/images/download/x-3814050_1920.png"
+
 
     },
  posts:[
