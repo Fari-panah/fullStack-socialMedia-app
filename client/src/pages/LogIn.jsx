@@ -3,22 +3,21 @@ import { Container, Typography, Paper, Box,
  } from "@mui/material"
 import { useState } from "react"
 import { Link, useNavigate } from 'react-router-dom'
-import loginService from '../services/login'
 import Notification from '../components/Notification'
+import { useAuthActions } from "../stores/auth.store"
+import OAuth from "../components/OAuth"
 
 const LogIn = () => {
   const [username, setUsername] = useState('')
   const [password, setPassword] = useState('')
   const [errorMessage, setErrorMessage] = useState(null)
-  const [user, setUser] = useState(null)
 
   const navigate = useNavigate()
-
+  const { login } = useAuthActions()
   const handleLoginForm= async (e) => {
     e.preventDefault()
     try {
-      const user = await loginService.login({ username, password })
-      setUser(user)
+      await login({ username, password })
       setUsername('')
       setPassword('')
       navigate('/')
@@ -34,12 +33,6 @@ const LogIn = () => {
   }
   return (
     <>
-    <Notification message={errorMessage} />
-    {user && (
-    <Typography>
-      Logged in {user.username}
-    </Typography>
-  )}
     <Container>
       <Paper
        elevation={6}
@@ -71,6 +64,7 @@ const LogIn = () => {
             }
         />
           <TextField
+          type="password"
           label="Password"
           fullWidth
           margin="normal"
@@ -95,6 +89,7 @@ const LogIn = () => {
         }}>
         Log In
         </Button>
+        <OAuth />
         <Typography
             align="center"
             sx={{ mt: 3 }}
@@ -111,6 +106,10 @@ const LogIn = () => {
             </Link>
         </Typography>
         </Box>
+        <Notification
+            message={errorMessage}
+            severity="error"
+            />
 
       </Paper>
     </Container>

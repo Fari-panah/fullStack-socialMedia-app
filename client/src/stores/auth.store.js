@@ -23,6 +23,6 @@ const useAuthStore = create((
 
 ))
 export const useCurrentUser = () => useAuthStore(state => state.currentUser)
-export const useAuthActions = () =>  useAuthStore(state => state.ations)
+export const useAuthActions = () =>  useAuthStore(state => state.actions)
 
 export default useAuthStore

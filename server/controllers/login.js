@@ -30,7 +30,11 @@ const login = async (req, res) => {
         )
         res
             .status(200)
-            .send({ token, username: user.username, name: user.name })
+            .send({ 
+                token,
+                username: user.username,
+                email: user.email,
+                name: user.name })
             
     } catch (error) {
         res.status(400).json({error: error.message })

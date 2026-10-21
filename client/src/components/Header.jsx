@@ -15,13 +15,15 @@ import { styled } from '@mui/material/styles'
 import InputBase from '@mui/material/InputBase'
 import ConnectWithoutContactIcon from '@mui/icons-material/ConnectWithoutContact'
 import DarkModeIcon from '@mui/icons-material/DarkMode'
+import {useCurrentUser } from '../stores/auth.store'
+import { Avatar } from '@mui/material'
 
 const pages = [
   { name: 'Home', path: '/' },
   { name: 'Projects', path: '/projects' },
   { name: 'About', path: '/about' },
 ]
-const settings = ['Profile', 'Account', 'Dashboard', 'Logout']
+//const settings = ['Profile', 'Account', 'Dashboard', 'Logout']
 const SearchIconWrapper = styled('div')(() => ({
   padding: '0 12px',
   height: '100%',
@@ -61,6 +63,7 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
 }));
 
 const Header = () => {
+  const currentUser = useCurrentUser()
   const [anchorElNav, setAnchorElNav] = useState(null);
   const [anchorElUser, setAnchorElUser] = useState(null);
 
@@ -232,6 +235,54 @@ const Header = () => {
           </IconButton>
             {/* Log In button and its menu */}
             <Box sx={{ flexGrow: 0 }}> 
+            {currentUser ? (<>
+        <IconButton onClick={handleOpenUserMenu}>
+        <Avatar src={currentUser.profilePicture} />
+        </IconButton>
+
+        <Menu
+          anchorEl={anchorElUser}
+          open={Boolean(anchorElUser)}
+          onClose={handleCloseUserMenu}
+        >
+          <Box
+        sx={{
+          px: 2,
+          py: 1.5,
+          borderBottom: '1px solid',
+          borderColor: 'divider',
+        }}
+      >
+        <Typography variant="subtitle2">
+          @{currentUser.username}
+        </Typography>
+
+        <Typography
+          variant="body2"
+          color="text.secondary"
+        >
+          {currentUser.email}
+        </Typography>
+      </Box>
+          <MenuItem onClick={handleCloseUserMenu}>
+            Profile
+          </MenuItem>
+
+          <MenuItem onClick={handleCloseUserMenu}>
+            Dashboard
+          </MenuItem>
+
+          <MenuItem
+            onClick={() => {
+              logout()
+              handleCloseUserMenu()
+            }}
+          >
+                  Logout
+            </MenuItem>
+          </Menu>
+        </>) : (
+               <Link to= '/login'>
                 <Button
                     onClick={handleOpenUserMenu}
                     sx={{
@@ -257,28 +308,11 @@ const Header = () => {
                   >
                   Log In 
                  </Button>
-            <Menu
-              sx={{ mt: '45px' }}
-              id="menu-appbar"
-              anchorEl={anchorElUser}
-              anchorOrigin={{
-                vertical: 'top',
-                horizontal: 'right',
-              }}
-              keepMounted
-              transformOrigin={{
-                vertical: 'top',
-                horizontal: 'right',
-              }}
-              open={Boolean(anchorElUser)}
-              onClose={handleCloseUserMenu}
-            >
-              {settings.map((setting) => (
-                <MenuItem key={setting} onClick={handleCloseUserMenu}>
-                  <Typography sx={{ textAlign: 'center' }}>{setting}</Typography>
-                </MenuItem>
-              ))}
-            </Menu>
+                 </Link>
+
+            )}
+           
+            
           </Box>
         </Toolbar>
       </Container>

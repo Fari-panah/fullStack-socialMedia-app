@@ -8,6 +8,7 @@ import { useState } from 'react'
 import { Link } from 'react-router-dom'
 import Notification from '../components/Notification'
 import userService from '../services/users'
+import OAuth from '../components/OAuth'
 const SignUp = () => {
     const [username, setUsername] = useState('')
     const [email, setEmail] = useState('')
@@ -40,9 +41,6 @@ const SignUp = () => {
                 'Failed to create user'
             )
         }
-      
-
-
     }
     return(
         <Container>
@@ -121,6 +119,7 @@ const SignUp = () => {
                     >
                         Sign Up
                     </Button>
+                    <OAuth />
                     <Typography
                         align="center"
                         sx={{ mt: 3 }}
