@@ -1,4 +1,3 @@
-import { useState, useEffect } from 'react'
 import { Link, useLocation } from 'react-router-dom'
 import { useCurrentUser, useAuthActions } from '../stores/auth.store'
 import {
@@ -21,18 +20,12 @@ import LogoutIcon from '@mui/icons-material/Logout'
 
 const Sidebar = () => {
     const location = useLocation()
+    const urlParams = new URLSearchParams(location.search)
+    const tab = urlParams.get('tab') || 'profile'
     const currentUser = useCurrentUser()
     const { logout } = useAuthActions()
-    const [tab , setTab] = useState('')
 
-    useEffect(() => {
-        const urlParams = new URLSearchParams(location.search)
-        const tabFromUrl = urlParams.get('tab')
-        if (tabFromUrl){
-            setTab(tabFromUrl)
-        }
-    }, [location.search])
-
+   
     const sidebarItemStyles = {
         borderRadius: 2,
         mb: 0.5,
