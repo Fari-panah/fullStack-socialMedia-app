@@ -10,6 +10,7 @@ import LogIn from './pages/LogIn'
 import Dashboard from './pages/Dashboard'
 import Header from './components/Header'
 import Home from './pages/Home'
+import PrivateRoute from './components/PrivateRoute'
 
 
 
@@ -32,10 +33,14 @@ const App = () => {
      {user && <Home />}. */}
      
       <Routes>
+        <Route path="/" element={<Home/>} />
         <Route path="/signup" element={<SignUp/>} />
         <Route path="/login" element={<LogIn/>} />
-        <Route path="/dashboard" element={<Dashboard/>} />
-        <Route path="/" element={<Home/>} />
+        <Route element={<PrivateRoute />}>
+          <Route path="/dashboard" element={<Dashboard/>} />
+        </Route>
+        
+        
       </Routes>
         
      </ThemeProvider> 
