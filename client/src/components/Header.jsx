@@ -15,8 +15,10 @@ import { styled } from '@mui/material/styles'
 import InputBase from '@mui/material/InputBase'
 import ConnectWithoutContactIcon from '@mui/icons-material/ConnectWithoutContact'
 import DarkModeIcon from '@mui/icons-material/DarkMode'
+import LightModeIcon from '@mui/icons-material/LightMode'
 import {useCurrentUser } from '../stores/auth.store'
 import { Avatar } from '@mui/material'
+import { useThemeMode, useThemeActions } from '../stores/theme.store'
 
 const pages = [
   { name: 'Home', path: '/' },
@@ -63,6 +65,8 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
 }));
 
 const Header = () => {
+  const mode = useThemeMode()
+  const toggleTheme  = useThemeActions()
   const currentUser = useCurrentUser()
   const [anchorElNav, setAnchorElNav] = useState(null);
   const [anchorElUser, setAnchorElUser] = useState(null);
@@ -227,12 +231,25 @@ const Header = () => {
             ))}
           </Box>
           {/* Dark mode button */}
-          <IconButton aria-label="Toggle dark mode" 
-            sx={{ width: 48, height: 48, border: '1px solid', 
-            borderColor: 'divider', color: 'text.primary', 
-            borderRadius: '50%', mr: 2, }} > 
-            <DarkModeIcon /> 
+          <IconButton
+            aria-label="Toggle dark mode"
+            onClick={toggleTheme}
+            sx={{
+              width: 48,
+              height: 48,
+              border: '1px solid',
+              borderColor: 'divider',
+              color: 'text.primary',
+              borderRadius: '50%',
+              mr: 2,
+            }}
+          >
+            {mode === 'light'
+              ? <DarkModeIcon />
+              : <LightModeIcon />
+            }
           </IconButton>
+
             {/* Log In button and its menu */}
             <Box sx={{ flexGrow: 0 }}> 
             {currentUser ? (<>
@@ -274,7 +291,7 @@ const Header = () => {
 
           <MenuItem
             onClick={() => {
-              logout()
+              //logout()
               handleCloseUserMenu()
             }}
           >

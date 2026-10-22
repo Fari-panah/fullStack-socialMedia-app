@@ -1,8 +1,9 @@
 import { createTheme } from '@mui/material/styles'
 
-const theme = createTheme({
+const getTheme = (mode) => 
+  createTheme({
   palette: {
-    mode: 'dark',
+    mode,
     primary: {
         main: '#673ab7', 
         light: '#9575cd',
@@ -75,4 +76,4 @@ components: {
 });
      
 
-export default theme
+export default getTheme
