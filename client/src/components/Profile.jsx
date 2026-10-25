@@ -1,7 +1,8 @@
 
 import { useCurrentUser } from '../stores/auth.store'
-import { usestate} from 'react'
-const profile = () => {
+
+const Profile = () => {
+
     const currentUser = useCurrentUser()
   return (
     <div>
@@ -33,4 +34,4 @@ const profile = () => {
   )
 }
 
-export default profile
+export default Profile
