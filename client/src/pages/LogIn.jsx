@@ -1,15 +1,17 @@
 import { Container, Typography, Paper, Box,
   TextField, Button
- } from "@mui/material"
-import { useState } from "react"
+ } from '@mui/material'
+import { useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import Notification from '../components/Notification'
-import { useAuthActions } from "../stores/auth.store"
-import OAuth from "../components/OAuth"
+import { useAuthActions } from '../stores/auth.store'
+import OAuth from '../components/OAuth'
+import useField from '../hooks/useField'
 
 const LogIn = () => {
-  const [username, setUsername] = useState('')
-  const [password, setPassword] = useState('')
+  const username = useField('text')
+  const password = useField('password')
+ 
   const [errorMessage, setErrorMessage] = useState(null)
 
   const navigate = useNavigate()
@@ -17,9 +19,11 @@ const LogIn = () => {
   const handleLoginForm= async (e) => {
     e.preventDefault()
     try {
-      await login({ username, password })
-      setUsername('')
-      setPassword('')
+      await login({ 
+        username: username.value,
+        password: password.value,
+      })
+      
       navigate('/')
       
     } catch (error) {
@@ -58,19 +62,13 @@ const LogIn = () => {
             label="Username"
             fullWidth
             margin="normal"
-            value={username}
-            onChange={(e) =>
-            setUsername(e.target.value)
-            }
+            {...username}
         />
           <TextField
-          type="password"
           label="Password"
           fullWidth
           margin="normal"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)
-          }
+          {...password}
       />
       <Button
         type="submit"
